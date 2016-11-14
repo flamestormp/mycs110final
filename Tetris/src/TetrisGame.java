@@ -19,7 +19,11 @@ public class TetrisGame {
         // Take this out and construct your random piece here.
         //current_piece = new O_Piece(board);
         //current_piece = new Z_Piece(board);
-        current_piece = new T_Piece(board);
+        //current_piece = new S_Piece(board);
+        //current_piece = new T_Piece(board);
+        //current_piece = new L_Piece(board);
+        //current_piece = new J_Piece(board);
+        current_piece = new I_Piece(board);
         current_piece.moveToTetrisLocation(3, 3);
         //TetrisSquare square1 = new TetrisSquare(board);
         //square1.moveToTetrisLocation(1, 1);
