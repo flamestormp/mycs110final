@@ -4,16 +4,11 @@ public abstract class TetrisPiece {
     protected TetrisSquare piece1;
     protected TetrisSquare piece2;
     protected TetrisSquare piece3;
-    private int orientation = 0; // 0-3 (4 possible positions)
 
     public abstract void down();
 
     public int getOrientation() {
         return orientation;
-    }
-
-    public void setOrientation(int orient) {
-        orientation = orient;
     }
 
     public void moveToTetrisLocation(int x, int y) {
