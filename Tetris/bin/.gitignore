@@ -1,7 +1,6 @@
-/Z_getPiece.class
+/Tetris.class
+/TetrisBoard.class
+/TetrisGame.class
+/TetrisPiece.class
+/TetrisSquare.class
 /Z_Piece.class
-/T_Piece.class
-/S_Piece.class
-/L_Piece.class
-/J_Piece.class
-/I_Piece.class
