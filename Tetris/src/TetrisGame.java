@@ -13,7 +13,8 @@ import javafx.scene.paint.Color;
  */
 public class TetrisGame {
     private final Tetris tetrisApp;
-    
+    TetrisPiece current_piece;
+
     /**
      * Initialize the game. Remove the example code and replace with code
      * that creates a random piece.
@@ -23,13 +24,13 @@ public class TetrisGame {
     public TetrisGame(Tetris tetrisApp, TetrisBoard board) {
         // Some sample code that places two squares on the board.
         // Take this out and construct your random piece here.
-        TetrisSquare square1 = new TetrisSquare(board);
-        square1.moveToTetrisLocation(1, 1);
-        square1.setColor(Color.BLUEVIOLET);
-        TetrisSquare square2 = new TetrisSquare(board);
-        square2.moveToTetrisLocation(2, 3);
-        square2.setColor(Color.RED);
-        
+        //current_piece = new O_Piece(board);
+        current_piece = new Z_Piece(board);
+        current_piece.moveToTetrisLocation(3, 3);
+        //TetrisSquare square1 = new TetrisSquare(board);
+        //square1.moveToTetrisLocation(1, 1);
+        //square1.setColor(Color.BLACK);
+
         this.tetrisApp = tetrisApp;
         // You can use this to show the score, etc.
         tetrisApp.setMessage("Game has started!");
@@ -41,11 +42,12 @@ public class TetrisGame {
     void update() {
         //System.out.println("updating");
     }
-    
+
     /**
      * Move the current tetris piece left.
      */
     void left() {
+        current_piece.left();
         System.out.println("left key was pressed!");
     }
 
@@ -53,6 +55,7 @@ public class TetrisGame {
      * Move the current tetris piece right.
      */
     void right() {
+        current_piece.right();
         System.out.println("right key was pressed!");
     }
 
@@ -67,14 +70,16 @@ public class TetrisGame {
      * Rotate the current piece counter-clockwise.
      */
     void rotateLeft() {
+        current_piece.rotateLeft();
         System.out.println("rotate left key was pressed!");
     }
-    
+
     /**
      * Rotate the current piece clockwise.
      */
     void rotateRight() {
+        current_piece.rotateRight();
         System.out.println("rotate right key was pressed!");
     }
-    
+
 }

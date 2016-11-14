@@ -1,23 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * A single Square on the tetris board. Squares have fixed height and width and 
- * are positioned at grid locations on the board. A square at board location 
- * 3, 4 for example, would be drawn at 3*TetrisBoard.SQUARE_SIZE, 
+ * A single Square on the tetris board. Squares have fixed height and width and
+ * are positioned at grid locations on the board. A square at board location
+ * 3, 4 for example, would be drawn at 3*TetrisBoard.SQUARE_SIZE,
  * 4*TetrisBoard.SQUARE_SIZE.
- * 
- * The tetris board x and y locations of the Square are IntegerProperties. You 
- * can either 
+ *
+ * The tetris board x and y locations of the Square are IntegerProperties. You
+ * can either
  * @author pipWolfe
  */
 public class TetrisSquare {
@@ -28,25 +21,42 @@ public class TetrisSquare {
     // The y location in board coordinates
     private IntegerProperty tetris_y = new SimpleIntegerProperty();
     private final TetrisBoard board;
-    
+    private int relLocX = 0;
+    private int relLocY = 0;
+
+    public int getRelLocY() {
+        return relLocY;
+    }
+
+    public void setRelLocY(int l) {
+        relLocY = l;
+    }
+
+    public int getRelLocX() {
+        return relLocX;
+    }
+
+    public void setRelLocX(int l) {
+        relLocX = l;
+    }
     /**
-     * Creates a square and draws it in the board. The shape for a square is 
+     * Creates a square and draws it in the board. The shape for a square is
      * a rectangle with height and width equal to TetrisBoard.SQUARE_SIZE.
      * The location of the shape is set to tetris_x*TetrisBoard.SQUARE_SIZE,
      * tetris_y*TetrisBoard.SQUARE_SIZE via bindings, so that whenever
      * tetris_x and tetris_y are updated, the square's location will update.
-     * @param board 
+     * @param board
      */
     public TetrisSquare(TetrisBoard board) {
         this.board = board;
         this.board.getChildren().add(shape);
-        
+
         // set the x and y locations so that they are always a multiple
         // of the size of a grid square
         shape.xProperty().bind(tetris_x.multiply(TetrisBoard.SQUARE_SIZE));
         shape.yProperty().bind(tetris_y.multiply(TetrisBoard.SQUARE_SIZE));
     }
- 
+
     /**
      * Move the square to the specified x and y board coordinates. Undoes any
      * binding currently in effect on the coordinates, so that the square
@@ -60,7 +70,7 @@ public class TetrisSquare {
         tetris_x.set(x); // due to binding, moves to x*SQUARE_SIZE, y*SQUARE_SIZE
         tetris_y.set(y);
     }
-    
+
     /**
      * Get the x location of the square in board coordinates.
      * @return current x location on the board
@@ -68,7 +78,7 @@ public class TetrisSquare {
     public int getX() {
         return tetris_x.get();
     }
-    
+
     /**
      * Get the y location of the square in board coordinates.
      * @return current y location on the board
@@ -78,8 +88,8 @@ public class TetrisSquare {
     }
 
     /**
-     * Get the x location in board coordinates as an IntegerProperty. If you 
-     * want to learn to use javafx properties, you can use this to tie the 
+     * Get the x location in board coordinates as an IntegerProperty. If you
+     * want to learn to use javafx properties, you can use this to tie the
      * Square's location to another variable (like the Piece's location). If you
      * prefer, you can use moveToTetrisLocation, getX and getY instead, ignoring
      * the property binding functionality.
@@ -88,10 +98,10 @@ public class TetrisSquare {
     public IntegerProperty xProperty() {
         return tetris_x;
     }
-    
+
     /**
-     * Get the y location in board coordinates as an IntegerProperty. If you 
-     * want to learn to use javafx properties, you can use this to tie the 
+     * Get the y location in board coordinates as an IntegerProperty. If you
+     * want to learn to use javafx properties, you can use this to tie the
      * Square's location to another variable (like the Piece's location). If you
      * prefer, you can use moveToTetrisLocation, getX and getY instead, ignoring
      * the property binding functionality.
@@ -103,7 +113,7 @@ public class TetrisSquare {
 
     /**
      * Sets the color of the square.
-     * @param color 
+     * @param color
      */
     public void setColor(Color color) {
         shape.setFill(color);

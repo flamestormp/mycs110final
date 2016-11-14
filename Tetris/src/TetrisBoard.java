@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,7 +7,7 @@ import javafx.scene.paint.Color;
 
 /**
  * A Pane in which tetris squares can be displayed.
- * 
+ *
  * @author pipWolfe
  */
 public class TetrisBoard extends Pane{
@@ -31,11 +24,11 @@ public class TetrisBoard extends Pane{
     public TetrisBoard() {
         this.setPrefHeight(Y_DIM_SQUARES*SQUARE_SIZE);
         this.setPrefWidth(X_DIM_SQUARES*SQUARE_SIZE);
-        BackgroundFill myBF = new BackgroundFill(Color.BLUEVIOLET, new CornerRadii(1),
-            new Insets(0.0,0.0,0.0,0.0));// or null for the padding
+        BackgroundFill myBF = new BackgroundFill(Color.BLUEVIOLET, new
+                CornerRadii(1), new Insets(0.0,0.0,0.0,0.0));
+        // or null for the padding
         setBackground(new Background(myBF));
 
     }
-    
-    
+
 }

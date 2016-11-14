@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -40,20 +33,20 @@ public class Tetris extends Application {
     /**
      * Sets up the tetris board and game, as well as a status label
      * that can be used to display scores and messages.
-     * 
+     *
      * Enables key events for the arrow keys and space bar, as well
      * as an animation.
-     * 
+     *
      * @param primaryStage
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
         tetrisBoard = new TetrisBoard();
-        
+
         statusLabel = new Label("Tetris");
         statusLabel.setTextFill(Color.RED);
-        
+
         BorderPane pane = new BorderPane();
         pane.setCenter(tetrisBoard);
         pane.setTop(statusLabel);
@@ -73,7 +66,7 @@ public class Tetris extends Application {
 
     /**
      * Changes the message in the status label at the top of the screen.
-     * @param message 
+     * @param message
      */
     public void setMessage(String message) {
         statusLabel.setText(message);
@@ -97,7 +90,7 @@ public class Tetris extends Application {
     }
 
     /**
-     * Sets up key events for the arrow keys and space bar. All keys send 
+     * Sets up key events for the arrow keys and space bar. All keys send
      * messages to the game, which should react appropriately.
      */
     private void setUpKeyPresses() {
@@ -117,7 +110,9 @@ public class Tetris extends Application {
                     break;
                 case SPACE:
                     game.drop();
-                    break;
+                break;
+            default:
+                break;
 
             }
         });
@@ -132,7 +127,7 @@ public class Tetris extends Application {
         animation.pause();
     }
 
-    /** 
+    /**
      * Resumes the animation.
      */
     private void resume() {
