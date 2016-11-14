@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-import javafx.scene.paint.Color;
+//import javafx.scene.paint.Color;
 
 /**
  * This should be implemented to include your game control.
@@ -25,7 +18,8 @@ public class TetrisGame {
         // Some sample code that places two squares on the board.
         // Take this out and construct your random piece here.
         //current_piece = new O_Piece(board);
-        current_piece = new Z_Piece(board);
+        //current_piece = new Z_Piece(board);
+        current_piece = new T_Piece(board);
         current_piece.moveToTetrisLocation(3, 3);
         //TetrisSquare square1 = new TetrisSquare(board);
         //square1.moveToTetrisLocation(1, 1);

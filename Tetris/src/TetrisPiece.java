@@ -6,10 +6,6 @@ public abstract class TetrisPiece {
     protected TetrisSquare piece3;
     private int orientation = 0; // 0-3 (4 possible positions)
 
-    public abstract void rotateLeft();
-
-    public abstract void rotateRight();
-
     public abstract void down();
 
     public int getOrientation() {
@@ -33,5 +29,43 @@ public abstract class TetrisPiece {
 
     public void right() {
         this.moveToTetrisLocation(piece0.getX() + 1, piece0.getY());
+    }
+
+    public void rotateLeft() {
+        int temp;
+        temp = piece1.getRelLocY();
+        piece1.setRelLocY(-piece1.getRelLocX());
+        piece1.setRelLocX(temp);
+        temp = piece2.getRelLocY();
+        piece2.setRelLocY(-piece2.getRelLocX());
+        piece2.setRelLocX(temp);
+        temp = piece3.getRelLocY();
+        piece3.setRelLocY(-piece3.getRelLocX());
+        piece3.setRelLocX(temp);
+        piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(),
+                piece1.getRelLocY()+piece0.getY());
+        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(),
+                piece2.getRelLocY()+piece0.getY());
+        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(),
+                piece3.getRelLocY()+piece0.getY());
+    }
+
+    public void rotateRight() {
+        int temp;
+        temp = piece1.getRelLocY();
+        piece1.setRelLocY(piece1.getRelLocX());
+        piece1.setRelLocX(-temp);
+        temp = piece2.getRelLocY();
+        piece2.setRelLocY(piece2.getRelLocX());
+        piece2.setRelLocX(-temp);
+        temp = piece3.getRelLocY();
+        piece3.setRelLocY(piece3.getRelLocX());
+        piece3.setRelLocX(-temp);
+        piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(),
+                piece1.getRelLocY()+piece0.getY());
+        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(),
+                piece2.getRelLocY()+piece0.getY());
+        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(),
+                piece3.getRelLocY()+piece0.getY());
     }
 }
