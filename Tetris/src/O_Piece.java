@@ -1,5 +1,12 @@
 import javafx.scene.paint.Color;
 
+/**
+ * @author Phillip Nguyen
+ * 
+ * orientation:
+ * piece2, piece3
+ * piece1, piece0
+ */
 public class O_Piece extends TetrisPiece {
 
     public O_Piece(TetrisBoard board){
@@ -28,7 +35,4 @@ public class O_Piece extends TetrisPiece {
         //a square observed from any angle is still a square
     }
 
-    public void down() {
-
-    }
 }

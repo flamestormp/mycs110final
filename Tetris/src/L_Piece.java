@@ -1,7 +1,19 @@
 import javafx.scene.paint.Color;
 
+/**
+ * @author Phillip Nguyen
+ * 
+ * orientation:
+ * 
+ * piece1, piece2
+ *		   piece0
+ *		   piece3
+ */
 public class L_Piece extends TetrisPiece {
 
+    /**
+     * @param board game board
+     */
     public L_Piece(TetrisBoard board) {
         //piece0 is the center, make it gray for debugging
         piece0 = new TetrisSquare(board);
@@ -18,7 +30,4 @@ public class L_Piece extends TetrisPiece {
         piece3.setColor(Color.ORANGE);
     }
 
-    public void down() {
-
-    }
 }

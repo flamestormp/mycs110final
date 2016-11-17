@@ -21,23 +21,37 @@ public class TetrisSquare {
     // The y location in board coordinates
     private IntegerProperty tetris_y = new SimpleIntegerProperty();
     private final TetrisBoard board;
+    
+    //relative location coordinates to another square designated as center square
     private int relLocX = 0;
     private int relLocY = 0;
 
+    /**
+     * @return relative y coordinate
+     */
     public int getRelLocY() {
         return relLocY;
     }
 
-    public void setRelLocY(int l) {
-        relLocY = l;
+    /**
+     * @param y new relative y coordinate
+     */
+    public void setRelLocY(int y) {
+        relLocY = y;
     }
 
+    /**
+     * @return relative x coordinate
+     */
     public int getRelLocX() {
         return relLocX;
     }
 
-    public void setRelLocX(int l) {
-        relLocX = l;
+    /**
+     * @param x new relative x coordinate
+     */
+    public void setRelLocX(int x) {
+        relLocX = x;
     }
     /**
      * Creates a square and draws it in the board. The shape for a square is

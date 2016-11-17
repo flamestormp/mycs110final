@@ -1,5 +1,15 @@
 import javafx.scene.paint.Color;
 
+/**
+ * @author Phillip Nguyen
+ *
+ * orientation:
+ * 
+ * piece2, piece1
+ * piece0
+ * piece3
+ * 
+ */
 public class J_Piece extends TetrisPiece {
 
     public J_Piece(TetrisBoard board) {
@@ -18,7 +28,4 @@ public class J_Piece extends TetrisPiece {
         piece3.setColor(Color.BLUE);
     }
 
-    public void down() {
-
-    }
 }

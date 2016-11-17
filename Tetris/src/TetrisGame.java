@@ -1,12 +1,11 @@
-//import javafx.scene.paint.Color;
-
 /**
  * This should be implemented to include your game control.
  * @author pipWolfe
+ * @author Phillip Nguyen
  */
 public class TetrisGame {
     private final Tetris tetrisApp;
-    TetrisPiece current_piece;
+    TetrisPiece current_piece; // reference can be updated for new piece.
 
     /**
      * Initialize the game. Remove the example code and replace with code
@@ -15,30 +14,28 @@ public class TetrisGame {
      * @param board A reference to the board on which Squares are drawn
      */
     public TetrisGame(Tetris tetrisApp, TetrisBoard board) {
-        // Some sample code that places two squares on the board.
-        // Take this out and construct your random piece here.
+    	// Randomly generates one of the 7 tetris pieces.
         int r = (int)(Math.random()*7);
         switch (r) {
-        case 0: current_piece = new O_Piece(board);
-                break;
-        case 1: current_piece = new Z_Piece(board);
-                break;
-        case 2: current_piece = new S_Piece(board);
-                break;
-        case 3: current_piece = new T_Piece(board);
-                break;
-        case 4: current_piece = new L_Piece(board);
-                break;
-        case 5: current_piece = new J_Piece(board);
-                break;
-        case 6: current_piece = new I_Piece(board);
-                break;
-        default: //meh
+	        case 0: current_piece = new O_Piece(board);
+	                break;
+	        case 1: current_piece = new Z_Piece(board);
+	                break;
+	        case 2: current_piece = new S_Piece(board);
+	                break;
+	        case 3: current_piece = new T_Piece(board);
+	                break;
+	        case 4: current_piece = new L_Piece(board);
+	                break;
+	        case 5: current_piece = new J_Piece(board);
+	                break;
+	        case 6: current_piece = new I_Piece(board);
+	                break;
+        default:
         }
-        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES, 3);
-        //TetrisSquare square1 = new TetrisSquare(board);
-        //square1.moveToTetrisLocation(1, 1);
-        //square1.setColor(Color.BLACK);
+        
+        // Piece starts out in the middle of the screen near the top.
+        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 3);
 
         this.tetrisApp = tetrisApp;
         // You can use this to show the score, etc.
