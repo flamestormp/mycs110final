@@ -66,15 +66,17 @@ public class TetrisBoard extends Pane{
                 for(int x = 0; x < squares[y].length; x++) {
                     squares[y][x].removeFromDrawing();
                     squares[y][x] = null;
-                } /*
+                }
+                System.out.println("ROW CLEARED!");
                 for(int i = y-1; i > 0; i--) {
                     for(int x = 0; x < squares[i].length; x++) {
                     	if(squares[i][x] != null) {
-                    		squares[i+1][x] = null;
                     		squares[i+1][x] = new TetrisSquare(this,x,i,squares[i][x].getColor());
+                            squares[i+1][x].moveToTetrisLocation(x,i+1);
                     	}
                     }
-                } */
+                }
+                System.out.println("ROWS MOVED DOWN");
             }
         }
     }

@@ -43,7 +43,7 @@ public class TetrisGame {
         default:
         }
         // Piece starts out in the middle of the screen near the top.
-        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 3);
+        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 2);
     }
     /**
      * Animate the game, by moving the current tetris piece down.
@@ -57,6 +57,7 @@ public class TetrisGame {
             makePiece();
         }
         b.processRows();
+        System.out.println("(X,Y): "+current_piece.piece0.getX()+" "+current_piece.piece0.getY());
     }
 
     /**
