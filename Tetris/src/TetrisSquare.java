@@ -146,12 +146,13 @@ public class TetrisSquare {
     public void setColor(Color color) {
     	this.color = color;
         shape.setFill(color);
+        shape.setStroke(Color.BLACK);
     }
 
     public Color getColor() {
     	return color;
     }
-    
+
     /**
      * Removes the square from the TetrisBoard's Pane.
      */

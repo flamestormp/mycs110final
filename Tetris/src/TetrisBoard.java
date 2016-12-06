@@ -44,7 +44,7 @@ public class TetrisBoard extends Pane{
         piece2X = piece0X + p.piece2.getRelLocX();
         piece3X = piece0X + p.piece3.getRelLocX();
         Color color = p.getColor();
-        
+
         squares[piece0Y][piece0X] = new TetrisSquare(this,piece0X,piece0Y,color);
         squares[piece1Y][piece1X] = new TetrisSquare(this,piece1X,piece1Y,color);
         squares[piece2Y][piece2X] = new TetrisSquare(this,piece2X,piece2Y,color);
@@ -63,8 +63,9 @@ public class TetrisBoard extends Pane{
                 if(x == null) rowScan = false;
             }
             if(rowScan){
-                for(TetrisSquare x: squares[y]) {
-                    x.removeFromDrawing();
+                for(int x = 0; x < squares[y].length; x++) {
+                    squares[y][x].removeFromDrawing();
+                    squares[y][x] = null;
                 } /*
                 for(int i = y-1; i > 0; i--) {
                     for(int x = 0; x < squares[i].length; x++) {
