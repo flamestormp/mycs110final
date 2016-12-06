@@ -169,8 +169,24 @@ public abstract class TetrisPiece {
     /**
      * To be implemented for checkpoint 2
      */
-    public void down() {
+    public boolean down() {
+        int x0 = piece0.getX();
+        int x1 = piece1.getX();
+        int x2 = piece2.getX();
+        int x3 = piece3.getX();
+        int y0 = piece0.getY()+1;
+        int y1 = piece1.getY()+1;
+        int y2 = piece2.getY()+1;
+        int y3 = piece3.getY()+1;
 
+        if (y0 < 49 && x1 < 49 && x2 < 49 && x3 < 49){
+            if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
+                board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
+                this.moveToTetrisLocation(x0, y0);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

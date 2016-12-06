@@ -5,6 +5,7 @@
  */
 public class TetrisGame {
     private final Tetris tetrisApp;
+    private TetrisBoard b;
     TetrisPiece current_piece; // reference can be updated for new piece.
 
     /**
@@ -14,30 +15,11 @@ public class TetrisGame {
      * @param board A reference to the board on which Squares are drawn
      */
     public TetrisGame(Tetris tetrisApp, TetrisBoard board) {
-    	// Randomly generates one of the 7 tetris pieces.
-        int r = (int)(Math.random()*7);
-        switch (r) {
-	        case 0: current_piece = new O_Piece(board);
-	                break;
-	        case 1: current_piece = new Z_Piece(board);
-	                break;
-	        case 2: current_piece = new S_Piece(board);
-	                break;
-	        case 3: current_piece = new T_Piece(board);
-	                break;
-	        case 4: current_piece = new L_Piece(board);
-	                break;
-	        case 5: current_piece = new J_Piece(board);
-	                break;
-	        case 6: current_piece = new I_Piece(board);
-	                break;
-        default:
-        }
+        b = board;
+        makePiece();
 
-        // Piece starts out in the middle of the screen near the top.
-        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 3);
         TetrisPiece other_piece = new T_Piece(board);
-        other_piece.moveToTetrisLocation(13,3);
+        other_piece.moveToTetrisLocation(13,9);
         board.addTetrisSquares(other_piece);
         other_piece.delete();
 
@@ -46,11 +28,40 @@ public class TetrisGame {
         tetrisApp.setMessage("Game has started!");
     }
 
+    void makePiece(){
+    	// Randomly generates one of the 7 tetris pieces.
+        int r = (int)(Math.random()*7);
+        switch (r) {
+	        case 0: current_piece = new O_Piece(b);
+	                break;
+	        case 1: current_piece = new Z_Piece(b);
+	                break;
+	        case 2: current_piece = new S_Piece(b);
+	                break;
+	        case 3: current_piece = new T_Piece(b);
+	                break;
+	        case 4: current_piece = new L_Piece(b);
+	                break;
+	        case 5: current_piece = new J_Piece(b);
+	                break;
+	        case 6: current_piece = new I_Piece(b);
+	                break;
+        default:
+        }
+        // Piece starts out in the middle of the screen near the top.
+        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 3);
+    }
     /**
      * Animate the game, by moving the current tetris piece down.
      */
     void update() {
-        //System.out.println("updating");
+        System.out.println("updating");
+        boolean status = current_piece.down();
+        if(!status) {
+            b.addTetrisSquares(current_piece);
+            current_piece.delete();
+            makePiece();
+        }
     }
 
     /**
