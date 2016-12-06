@@ -81,6 +81,11 @@ public class TetrisGame {
      */
     void drop() {
         System.out.println("drop key was pressed!");
+        boolean status = current_piece.down();
+        while(true){
+            status = current_piece.down();
+            if(!status) break;
+        }
     }
 
     /**
