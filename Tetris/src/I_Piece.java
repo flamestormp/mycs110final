@@ -3,6 +3,7 @@ import javafx.scene.paint.Color;
 public class I_Piece extends TetrisPiece {
 
     public I_Piece(TetrisBoard board) {
+        super(board);
         //piece0 is the center, make it gray for debugging
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.CYAN);
@@ -21,7 +22,7 @@ public class I_Piece extends TetrisPiece {
      * Uses the standard formula:
      * new relative x = old relative y
      * new relative y = - (old relative x)
-     * 
+     *
      * Also includes alright bounds checking.
      */
     @Override
@@ -38,7 +39,7 @@ public class I_Piece extends TetrisPiece {
         piece3.setRelLocX(temp);
         System.out.println("X pos before rotate:" + piece0.getX());
         int max = TetrisBoard.X_DIM_SQUARES;
-        if (!(piece1.getX()-1 < 0 || piece2.getX()-1 < 0 || piece3.getX()-1 < 0) && 
+        if (!(piece1.getX()-1 < 0 || piece2.getX()-1 < 0 || piece3.getX()-1 < 0) &&
         		!(piece1.getX()+1 > max || piece2.getX()+1 > max || piece3.getX()+1 > max)) {
         	piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
   	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
@@ -63,7 +64,7 @@ public class I_Piece extends TetrisPiece {
      * Uses the standard formula:
      * new relative x = -(old relative y)
      * new relative y = old relative x
-     * 
+     *
      * Also includes slightly alright bounds checking.
      */
     @Override
@@ -81,7 +82,7 @@ public class I_Piece extends TetrisPiece {
 
         System.out.println("X pos before rotate:" + piece0.getX());
         int max = TetrisBoard.X_DIM_SQUARES;
-        if (!(piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) && 
+        if (!(piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) &&
         		!(piece1.getX() == max || piece2.getX() == max || piece3.getX() == max)) {
         	piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
   	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());

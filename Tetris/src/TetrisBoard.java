@@ -16,6 +16,8 @@ public class TetrisBoard extends Pane{
     // The number of squares that fit on the screen in the x and y dimensions
     public static final int X_DIM_SQUARES = 20;
     public static final int Y_DIM_SQUARES = 50;
+    // swap usual x y for easy for loop logic
+    private TetrisSquare[][] squares = new TetrisSquare[Y_DIM_SQUARES][X_DIM_SQUARES];
 
     /**
      * Sizes the board to hold the specified number of squares in the x and y
@@ -28,7 +30,29 @@ public class TetrisBoard extends Pane{
                 CornerRadii(1), new Insets(0.0,0.0,0.0,0.0));
         // or null for the padding
         setBackground(new Background(myBF));
+    }
 
+    public void addTetrisSquares(TetrisPiece p) {
+        int piece0Y, piece1Y, piece2Y, piece3Y;
+        piece0Y = p.piece0.getY();
+        piece1Y = piece0Y + p.piece1.getRelLocY();
+        piece2Y = piece0Y + p.piece2.getRelLocY();
+        piece3Y = piece0Y + p.piece3.getRelLocY();
+        int piece0X, piece1X, piece2X, piece3X;
+        piece0X = p.piece0.getX();
+        piece1X = piece0X + p.piece1.getRelLocX();
+        piece2X = piece0X + p.piece2.getRelLocX();
+        piece3X = piece0X + p.piece3.getRelLocX();
+
+        squares[piece0Y][piece0X] = new TetrisSquare(this,piece0X,piece0Y);
+        squares[piece1Y][piece1X] = new TetrisSquare(this,piece1X,piece1Y);
+        squares[piece2Y][piece2X] = new TetrisSquare(this,piece2X,piece2Y);
+        squares[piece3Y][piece3X] = new TetrisSquare(this,piece3X,piece3Y);
+    }
+
+    public boolean checkTetrisSquares(int x, int y) {
+        if(squares[y][x] == null) return true;
+        else return false;
     }
 
 }

@@ -21,7 +21,7 @@ public class TetrisSquare {
     // The y location in board coordinates
     private IntegerProperty tetris_y = new SimpleIntegerProperty();
     private final TetrisBoard board;
-    
+
     //relative location coordinates to another square designated as center square
     private int relLocX = 0;
     private int relLocY = 0;
@@ -69,6 +69,18 @@ public class TetrisSquare {
         // of the size of a grid square
         shape.xProperty().bind(tetris_x.multiply(TetrisBoard.SQUARE_SIZE));
         shape.yProperty().bind(tetris_y.multiply(TetrisBoard.SQUARE_SIZE));
+    }
+
+    public TetrisSquare(TetrisBoard board, int x, int y) {
+        this.board = board;
+        this.board.getChildren().add(shape);
+
+        // set the x and y locations so that they are always a multiple
+        // of the size of a grid square
+        shape.xProperty().bind(tetris_x.multiply(TetrisBoard.SQUARE_SIZE));
+        shape.yProperty().bind(tetris_y.multiply(TetrisBoard.SQUARE_SIZE));
+
+        moveToTetrisLocation(x,y);
     }
 
     /**

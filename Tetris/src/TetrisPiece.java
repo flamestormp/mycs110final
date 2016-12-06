@@ -1,25 +1,30 @@
 /**
  * Implementation of a general tetris piece. Each tetris piece has a total of
- * 4 squares, named as piece(0-3). Subclasses should set the colors of each 
- * square and the relative location to the designated center square (piece0 as 
+ * 4 squares, named as piece(0-3). Subclasses should set the colors of each
+ * square and the relative location to the designated center square (piece0 as
  * my convention, which has relLocX & relLocY of 0).
- * 
+ *
  * @author Phillip Nguyen
  */
 public abstract class TetrisPiece {
 
-	// to be initialized & defined
+    // to be initialized & defined
     protected TetrisSquare piece0;
     protected TetrisSquare piece1;
     protected TetrisSquare piece2;
     protected TetrisSquare piece3;
+    private TetrisBoard board;
+
+    public TetrisPiece(TetrisBoard board){
+        this.board = board;
+    }
 
     /**
      * Makes good use of relative locations to minimize complexity.
      * Not to be confused with method with same name in TetrisSquare class.
-     * 
+     *
      * @param x new x coordinate
-     * @param y new y coordinate 
+     * @param y new y coordinate
      */
     public void moveToTetrisLocation(int x, int y) {
         piece0.moveToTetrisLocation(x, y);
@@ -34,17 +39,21 @@ public abstract class TetrisPiece {
      */
     public void left() {
         // prevents blocks from going off screen without unnecessary loops & arrays
-    	boolean check1 = true;
-        boolean check2 = true;
-        boolean check3 = true;
-        boolean check4 = true;
-        if (piece0.getX()-1 < 0) check1 = false;
-        if (piece1.getX()-1 < 0) check2 = false;
-        if (piece2.getX()-1 < 0) check3 = false;
-        if (piece3.getX()-1 < 0) check4 = false;
-        if(check1 && check2 && check3 && check4)
-        	
-        this.moveToTetrisLocation(piece0.getX() - 1, piece0.getY());
+        int x0 = piece0.getX()-1;
+        int x1 = piece1.getX()-1;
+        int x2 = piece2.getX()-1;
+        int x3 = piece3.getX()-1;
+        int y0 = piece0.getY();
+        int y1 = piece1.getY();
+        int y2 = piece2.getY();
+        int y3 = piece3.getY();
+
+        if (x0 > 0 && x1 > 0 && x2 > 0 && x3 > 0){
+            if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
+                board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
+                this.moveToTetrisLocation(x0, y0);
+            }
+        }
     }
 
     /**
@@ -52,24 +61,29 @@ public abstract class TetrisPiece {
      * Includes bounds checking.
      */
     public void right() {
-        boolean check1 = true;
-        boolean check2 = true;
-        boolean check3 = true;
-        boolean check4 = true;
-        int max = TetrisBoard.X_DIM_SQUARES-1; //dunno why, itjustwerks
-        if (piece0.getX()+1 > max) check1 = false;
-        if (piece1.getX()+1 > max) check2 = false;
-        if (piece2.getX()+1 > max) check3 = false;
-        if (piece3.getX()+1 > max) check4 = false;
-        if(check1 && check2 && check3 && check4)
-        this.moveToTetrisLocation(piece0.getX() + 1, piece0.getY());
+        int max = TetrisBoard.X_DIM_SQUARES;
+        int x0 = piece0.getX()+1;
+        int x1 = piece1.getX()+1;
+        int x2 = piece2.getX()+1;
+        int x3 = piece3.getX()+1;
+        int y0 = piece0.getY();
+        int y1 = piece1.getY();
+        int y2 = piece2.getY();
+        int y3 = piece3.getY();
+
+        if (x0 < max && x1 < max && x2 < max && x3 < max){
+            if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
+                board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
+                this.moveToTetrisLocation(x0, y0);
+            }
+        }
     }
 
     /**
      * Uses the standard formula:
      * new relative x = old relative y
      * new relative y = - (old relative x)
-     * 
+     *
      * Also includes somewhat okay bounds checking.
      */
     public void rotateLeft() {
@@ -83,25 +97,25 @@ public abstract class TetrisPiece {
         temp = piece3.getRelLocY();
         piece3.setRelLocY(-piece3.getRelLocX());
         piece3.setRelLocX(temp);
-        
+
         int max = TetrisBoard.X_DIM_SQUARES;
-        if (!(piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) && 
-        		!(piece1.getX() == max || piece2.getX() == max || piece3.getX() == max)) {
-        	piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
-  	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
-  	        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
+        if (!(piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) &&
+                !(piece1.getX() == max || piece2.getX() == max || piece3.getX() == max)) {
+            piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
+            piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
+            piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
         }
         if (piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) {
-        	piece0.moveToTetrisLocation(piece0.getX()+1, piece0.getY());
-	        piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
-	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
-	        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
+            piece0.moveToTetrisLocation(piece0.getX()+1, piece0.getY());
+            piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
+            piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
+            piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
         }
         else if (piece1.getX() == max || piece2.getX() == max || piece3.getX() == max) {
-        	piece0.moveToTetrisLocation(piece0.getX()-1, piece0.getY());
-        	piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
- 	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
- 	        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
+            piece0.moveToTetrisLocation(piece0.getX()-1, piece0.getY());
+            piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
+            piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
+            piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
         }
     }
 
@@ -109,7 +123,7 @@ public abstract class TetrisPiece {
      * Uses the standard formula:
      * new relative x = -(old relative y)
      * new relative y = old relative x
-     * 
+     *
      * Also includes somewhat okay bounds checking.
      */
     public void rotateRight() {
@@ -125,27 +139,33 @@ public abstract class TetrisPiece {
         piece3.setRelLocX(-temp);
 
         int max = TetrisBoard.X_DIM_SQUARES;
-        if (!(piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) && 
-        		!(piece1.getX() == max || piece2.getX() == max || piece3.getX() == max)) {
-        	piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
-  	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
-  	        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
+        if (!(piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) &&
+                !(piece1.getX() == max || piece2.getX() == max || piece3.getX() == max)) {
+            piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
+            piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
+            piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
         }
         if (piece1.getX() == 0 || piece2.getX() == 0 || piece3.getX() == 0) {
-        	piece0.moveToTetrisLocation(piece0.getX()+1, piece0.getY());
-	        piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
-	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
-	        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
+            piece0.moveToTetrisLocation(piece0.getX()+1, piece0.getY());
+            piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
+            piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
+            piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
         }
         else if (piece1.getX() == max || piece2.getX() == max || piece3.getX() == max) {
-        	piece0.moveToTetrisLocation(piece0.getX()-1, piece0.getY());
-        	piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
- 	        piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
- 	        piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
+            piece0.moveToTetrisLocation(piece0.getX()-1, piece0.getY());
+            piece1.moveToTetrisLocation(piece1.getRelLocX()+piece0.getX(), piece1.getRelLocY()+piece0.getY());
+            piece2.moveToTetrisLocation(piece2.getRelLocX()+piece0.getX(), piece2.getRelLocY()+piece0.getY());
+            piece3.moveToTetrisLocation(piece3.getRelLocX()+piece0.getX(), piece3.getRelLocY()+piece0.getY());
         }
     }
-    
-    
+
+    public void delete(){
+        piece0.removeFromDrawing();
+        piece1.removeFromDrawing();
+        piece2.removeFromDrawing();
+        piece3.removeFromDrawing();
+    }
+
     /**
      * To be implemented for checkpoint 2
      */

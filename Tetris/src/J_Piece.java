@@ -4,15 +4,16 @@ import javafx.scene.paint.Color;
  * @author Phillip Nguyen
  *
  * orientation:
- * 
+ *
  * piece2, piece1
  * piece0
  * piece3
- * 
+ *
  */
 public class J_Piece extends TetrisPiece {
 
     public J_Piece(TetrisBoard board) {
+        super(board);
         //piece0 is the center, make it gray for debugging
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.BLUE);

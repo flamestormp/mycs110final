@@ -33,9 +33,13 @@ public class TetrisGame {
 	                break;
         default:
         }
-        
+
         // Piece starts out in the middle of the screen near the top.
         current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 3);
+        TetrisPiece other_piece = new T_Piece(board);
+        other_piece.moveToTetrisLocation(13,3);
+        board.addTetrisSquares(other_piece);
+        other_piece.delete();
 
         this.tetrisApp = tetrisApp;
         // You can use this to show the score, etc.

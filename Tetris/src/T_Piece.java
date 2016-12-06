@@ -2,9 +2,9 @@ import javafx.scene.paint.Color;
 
 /**
  * @author Phillip Nguyen
- * 
+ *
  * orientation:
- * 
+ *
  * piece1, piece0, piece3
  *		   piece2
  */
@@ -14,6 +14,7 @@ public class T_Piece extends TetrisPiece {
      * @param board game board
      */
     public T_Piece(TetrisBoard board) {
+        super(board);
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.PURPLE);
         piece1 = new TetrisSquare(board);
