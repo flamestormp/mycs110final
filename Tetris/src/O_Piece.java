@@ -9,9 +9,12 @@ import javafx.scene.paint.Color;
  */
 public class O_Piece extends TetrisPiece {
 
+    /**
+     * @param board game board
+     */
     public O_Piece(TetrisBoard board){
         //piece0 is the center, make it gray for debugging
-        super(board);
+        super(board,Color.YELLOW);
         piece0  = new TetrisSquare(board);
         piece0.setColor(Color.YELLOW);
         piece1 = new TetrisSquare(board);

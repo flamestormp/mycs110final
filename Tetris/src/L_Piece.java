@@ -16,7 +16,7 @@ public class L_Piece extends TetrisPiece {
      */
     public L_Piece(TetrisBoard board) {
         //piece0 is the center, make it gray for debugging
-        super(board);
+        super(board,Color.ORANGE);
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.ORANGE);
         piece1 = new TetrisSquare(board);

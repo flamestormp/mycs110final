@@ -16,7 +16,7 @@ public class Z_Piece extends TetrisPiece {
      */
     public Z_Piece(TetrisBoard board){
         //piece0 is the center, make it gray for debugging
-        super(board);
+        super(board,Color.RED);
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.RED);
         piece1 = new TetrisSquare(board);

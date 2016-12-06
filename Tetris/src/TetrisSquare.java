@@ -21,6 +21,7 @@ public class TetrisSquare {
     // The y location in board coordinates
     private IntegerProperty tetris_y = new SimpleIntegerProperty();
     private final TetrisBoard board;
+    Color color;
 
     //relative location coordinates to another square designated as center square
     private int relLocX = 0;
@@ -71,9 +72,10 @@ public class TetrisSquare {
         shape.yProperty().bind(tetris_y.multiply(TetrisBoard.SQUARE_SIZE));
     }
 
-    public TetrisSquare(TetrisBoard board, int x, int y) {
+    public TetrisSquare(TetrisBoard board, int x, int y, Color color) {
         this.board = board;
         this.board.getChildren().add(shape);
+        setColor(color);
 
         // set the x and y locations so that they are always a multiple
         // of the size of a grid square
@@ -142,9 +144,14 @@ public class TetrisSquare {
      * @param color
      */
     public void setColor(Color color) {
+    	this.color = color;
         shape.setFill(color);
     }
 
+    public Color getColor() {
+    	return color;
+    }
+    
     /**
      * Removes the square from the TetrisBoard's Pane.
      */

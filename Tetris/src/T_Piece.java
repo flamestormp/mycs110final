@@ -14,7 +14,7 @@ public class T_Piece extends TetrisPiece {
      * @param board game board
      */
     public T_Piece(TetrisBoard board) {
-        super(board);
+        super(board,Color.PURPLE);
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.PURPLE);
         piece1 = new TetrisSquare(board);

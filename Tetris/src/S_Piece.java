@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 public class S_Piece extends TetrisPiece {
 
     public S_Piece(TetrisBoard board) {
-        super(board);
+        super(board,Color.GREEN);
         //piece0 is the center, make it gray for debugging
         piece0 = new TetrisSquare(board);
         piece0.setColor(Color.GREEN);

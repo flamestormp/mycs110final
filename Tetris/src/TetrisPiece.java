@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+
 /**
  * Implementation of a general tetris piece. Each tetris piece has a total of
  * 4 squares, named as piece(0-3). Subclasses should set the colors of each
@@ -14,11 +16,17 @@ public abstract class TetrisPiece {
     protected TetrisSquare piece2;
     protected TetrisSquare piece3;
     private TetrisBoard board;
+    private Color color;
 
-    public TetrisPiece(TetrisBoard board){
+    public TetrisPiece(TetrisBoard board, Color color){
         this.board = board;
+        this.color = color;
     }
 
+    public Color getColor() {
+    	return color;
+    }
+    
     /**
      * Makes good use of relative locations to minimize complexity.
      * Not to be confused with method with same name in TetrisSquare class.
@@ -48,7 +56,7 @@ public abstract class TetrisPiece {
         int y2 = piece2.getY();
         int y3 = piece3.getY();
 
-        if (x0 > 0 && x1 > 0 && x2 > 0 && x3 > 0){
+        if (x0 >= 0 && x1 >= 0 && x2 >= 0 && x3 >= 0){
             if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
                 board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
                 this.moveToTetrisLocation(x0, y0);
@@ -170,6 +178,7 @@ public abstract class TetrisPiece {
      * To be implemented for checkpoint 2
      */
     public boolean down() {
+    	int max = TetrisBoard.Y_DIM_SQUARES;
         int x0 = piece0.getX();
         int x1 = piece1.getX();
         int x2 = piece2.getX();
@@ -179,7 +188,7 @@ public abstract class TetrisPiece {
         int y2 = piece2.getY()+1;
         int y3 = piece3.getY()+1;
 
-        if (y0 < 49 && x1 < 49 && x2 < 49 && x3 < 49){
+        if (y0 < max && y1 < max && y2 < max && y3 < max){
             if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
                 board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
                 this.moveToTetrisLocation(x0, y0);
