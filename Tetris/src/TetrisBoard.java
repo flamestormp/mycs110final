@@ -55,4 +55,22 @@ public class TetrisBoard extends Pane{
         else return false;
     }
 
+    public void processRows(){
+        for(int y = 0; y < Y_DIM_SQUARES; y++){
+            boolean rowScan = true;
+            for(TetrisSquare x: squares[y]){
+                if(x == null) rowScan = false;
+            }
+            if(rowScan){
+                for(TetrisSquare x: squares[y]){
+                    x.removeFromDrawing();
+                }
+                for(int i = y-1; i > 0; i--) {
+                    for(int x = 0; x < squares[i].length; x++){
+                       squares[i+1][x] = squares[i][x];
+                    }
+                }
+            }
+        }
+    }
 }

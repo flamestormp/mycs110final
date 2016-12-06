@@ -17,35 +17,29 @@ public class TetrisGame {
     public TetrisGame(Tetris tetrisApp, TetrisBoard board) {
         b = board;
         makePiece();
-
-        TetrisPiece other_piece = new T_Piece(board);
-        other_piece.moveToTetrisLocation(13,9);
-        board.addTetrisSquares(other_piece);
-        other_piece.delete();
-
         this.tetrisApp = tetrisApp;
         // You can use this to show the score, etc.
         tetrisApp.setMessage("Game has started!");
     }
 
     void makePiece(){
-    	// Randomly generates one of the 7 tetris pieces.
+        // Randomly generates one of the 7 tetris pieces.
         int r = (int)(Math.random()*7);
         switch (r) {
-	        case 0: current_piece = new O_Piece(b);
-	                break;
-	        case 1: current_piece = new Z_Piece(b);
-	                break;
-	        case 2: current_piece = new S_Piece(b);
-	                break;
-	        case 3: current_piece = new T_Piece(b);
-	                break;
-	        case 4: current_piece = new L_Piece(b);
-	                break;
-	        case 5: current_piece = new J_Piece(b);
-	                break;
-	        case 6: current_piece = new I_Piece(b);
-	                break;
+            case 0: current_piece = new O_Piece(b);
+                    break;
+            case 1: current_piece = new Z_Piece(b);
+                    break;
+            case 2: current_piece = new S_Piece(b);
+                    break;
+            case 3: current_piece = new T_Piece(b);
+                    break;
+            case 4: current_piece = new L_Piece(b);
+                    break;
+            case 5: current_piece = new J_Piece(b);
+                    break;
+            case 6: current_piece = new I_Piece(b);
+                    break;
         default:
         }
         // Piece starts out in the middle of the screen near the top.
@@ -62,6 +56,7 @@ public class TetrisGame {
             current_piece.delete();
             makePiece();
         }
+        b.processRows();
     }
 
     /**
