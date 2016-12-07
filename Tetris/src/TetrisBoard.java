@@ -56,7 +56,8 @@ public class TetrisBoard extends Pane{
         else return false;
     }
 
-    public void processRows() {
+    public int processRows() {
+        int multiplier = 0;
         for(int y = 0; y < Y_DIM_SQUARES; y++) {
             boolean rowScan = true;
             for(TetrisSquare x: squares[y]) {
@@ -73,11 +74,15 @@ public class TetrisBoard extends Pane{
                     	if(squares[i][x] != null) {
                     		squares[i+1][x] = new TetrisSquare(this,x,i,squares[i][x].getColor());
                             squares[i+1][x].moveToTetrisLocation(x,i+1);
+                            squares[i][x].removeFromDrawing();
+                            squares[i][x] = null;
                     	}
                     }
                 }
                 System.out.println("ROWS MOVED DOWN");
+                multiplier++;
             }
         }
+        return multiplier;
     }
 }

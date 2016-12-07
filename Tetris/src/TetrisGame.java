@@ -4,8 +4,10 @@
  * @author Phillip Nguyen
  */
 public class TetrisGame {
+    private boolean gameOver = false;
     private final Tetris tetrisApp;
     private TetrisBoard b;
+    private int score = 0;
     TetrisPiece current_piece; // reference can be updated for new piece.
 
     /**
@@ -44,20 +46,31 @@ public class TetrisGame {
         }
         // Piece starts out in the middle of the screen near the top.
         current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 2);
+        if(current_piece.checkDown() == false) {
+            gameOver = true;
+        }
+
     }
     /**
      * Animate the game, by moving the current tetris piece down.
      */
     void update() {
-        System.out.println("updating");
-        boolean status = current_piece.down();
-        if(!status) {
-            b.addTetrisSquares(current_piece);
-            current_piece.delete();
-            makePiece();
+        if(!gameOver){
+            System.out.println("updating");
+            boolean status = current_piece.down();
+            if(!status) {
+                b.addTetrisSquares(current_piece);
+                current_piece.delete();
+                makePiece();
+            }
+            int multiplier = b.processRows();
+            score += 100*multiplier;
+            tetrisApp.setMessage("Score: " + score);
+        } else {
+            tetrisApp.setMessage("Game Over!");
+            b.setOnKeyPressed(e -> {});
+            tetrisApp.pause();
         }
-        b.processRows();
-        System.out.println("(X,Y): "+current_piece.piece0.getX()+" "+current_piece.piece0.getY());
     }
 
     /**

@@ -123,7 +123,7 @@ public class Tetris extends Application {
     /**
      * Pauses the animation.
      */
-    private void pause() {
+    public void pause() {
         animation.pause();
     }
 

@@ -26,7 +26,7 @@ public abstract class TetrisPiece {
     public Color getColor() {
     	return color;
     }
-    
+
     /**
      * Makes good use of relative locations to minimize complexity.
      * Not to be confused with method with same name in TetrisSquare class.
@@ -192,6 +192,26 @@ public abstract class TetrisPiece {
             if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
                 board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
                 this.moveToTetrisLocation(x0, y0);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkDown() {
+    	int max = TetrisBoard.Y_DIM_SQUARES;
+        int x0 = piece0.getX();
+        int x1 = piece1.getX();
+        int x2 = piece2.getX();
+        int x3 = piece3.getX();
+        int y0 = piece0.getY()+1;
+        int y1 = piece1.getY()+1;
+        int y2 = piece2.getY()+1;
+        int y3 = piece3.getY()+1;
+
+        if (y0 < max && y1 < max && y2 < max && y3 < max){
+            if(board.checkTetrisSquares(x0,y0) && board.checkTetrisSquares(x1,y1) &&
+                board.checkTetrisSquares(x2,y2) && board.checkTetrisSquares(x3,y3)){
                 return true;
             }
         }
