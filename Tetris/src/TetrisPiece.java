@@ -18,11 +18,20 @@ public abstract class TetrisPiece {
     private TetrisBoard board;
     private Color color;
 
+    /**
+     * Basic constructor for TetrisPiece
+     * @param board
+     * @param color
+     */
     public TetrisPiece(TetrisBoard board, Color color){
         this.board = board;
         this.color = color;
     }
 
+    /**
+     * Getter method for piece color.
+     * @return Color
+     */
     public Color getColor() {
     	return color;
     }
@@ -167,6 +176,11 @@ public abstract class TetrisPiece {
         }
     }
 
+    /**
+     * Remove the squares from the board when they are not needed. Typically used after
+     * the piece has been added to the squares[][] matrix in TetrisBoard.
+     * @see TetrisBoard
+     */
     public void delete(){
         piece0.removeFromDrawing();
         piece1.removeFromDrawing();
@@ -175,7 +189,9 @@ public abstract class TetrisPiece {
     }
 
     /**
-     * To be implemented for checkpoint 2
+     * Wrapper for moveToTetrisLocation soley for downward movement.
+     * Includes bounds checking.
+     * @return completed action (true) or not (false)
      */
     public boolean down() {
     	int max = TetrisBoard.Y_DIM_SQUARES;
@@ -198,6 +214,10 @@ public abstract class TetrisPiece {
         return false;
     }
 
+    /**
+     * Checks if block can move without actually moving block. Used to check if the game is over.
+     * @return space below empty (true) or not (false)
+     */
     public boolean checkDown() {
     	int max = TetrisBoard.Y_DIM_SQUARES;
         int x0 = piece0.getX();

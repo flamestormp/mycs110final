@@ -12,7 +12,8 @@ import javafx.scene.paint.Color;
 public class Z_Piece extends TetrisPiece {
 
     /**
-     * @param board game board
+     * Basic constructor for Z_Piece
+     * @param board gameboard
      */
     public Z_Piece(TetrisBoard board){
         //piece0 is the center, make it gray for debugging

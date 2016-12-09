@@ -17,6 +17,7 @@ public class TetrisBoard extends Pane{
     public static final int X_DIM_SQUARES = 20;
     public static final int Y_DIM_SQUARES = 35;
     // swap usual x y for easy for loop logic
+    // this matrix stores the TetrisSquares from the previous pieces
     private TetrisSquare[][] squares = new TetrisSquare[Y_DIM_SQUARES][X_DIM_SQUARES];
 
     /**
@@ -32,6 +33,10 @@ public class TetrisBoard extends Pane{
         setBackground(new Background(myBF));
     }
 
+    /**
+     * Takes the information about the Squares in the TetrisPiece and adds them in to squares[][] matrix.
+     * @param p TetrisPiece
+     */
     public void addTetrisSquares(TetrisPiece p) {
         int piece0Y, piece1Y, piece2Y, piece3Y;
         piece0Y = p.piece0.getY();
@@ -51,11 +56,23 @@ public class TetrisBoard extends Pane{
         squares[piece3Y][piece3X] = new TetrisSquare(this,piece3X,piece3Y,color);
     }
 
+    /**
+     * Checks the squares[][] matrix to see if their is a square occupying that space.
+     * @param x coordinate
+     * @param y	coordinate
+     * @return empty (true) or not (false)
+     */
     public boolean checkTetrisSquares(int x, int y) {
         if(squares[y][x] == null) return true;
         else return false;
     }
 
+    /**
+     * Clears completed rows and shifts the above rows down. This method evaluates the rows
+     * top to bottom, to allow for correct functionality when multiple rows are completed at
+     * the same time. Players then get more score if multiple rows are cleared at once.
+     * @return score multiplier
+     */
     public int processRows() {
         int multiplier = 0;
         for(int y = 0; y < Y_DIM_SQUARES; y++) {

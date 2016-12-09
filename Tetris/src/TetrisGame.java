@@ -24,8 +24,10 @@ public class TetrisGame {
         tetrisApp.setMessage("Game has started!");
     }
 
-    void makePiece(){
-        // Randomly generates one of the 7 tetris pieces.
+    /**
+     * Randomly generates one of the 7 tetris pieces.
+     */
+    private void makePiece(){
         int r = (int)(Math.random()*7);
         switch (r) {
             case 0: current_piece = new O_Piece(b);
@@ -45,7 +47,8 @@ public class TetrisGame {
         default:
         }
         // Piece starts out in the middle of the screen near the top.
-        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 2);
+        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 0);
+        // End game if piece cannot move after created.
         if(current_piece.checkDown() == false) {
             gameOver = true;
         }
@@ -65,11 +68,11 @@ public class TetrisGame {
             }
             int multiplier = b.processRows();
             score += 100*multiplier;
-            tetrisApp.setMessage("Score: " + score);
+            tetrisApp.setMessage("Score: " + score); // update score
         } else {
             tetrisApp.setMessage("Game Over!");
-            b.setOnKeyPressed(e -> {});
-            tetrisApp.pause();
+            b.setOnKeyPressed(e -> {}); // disable key events
+            tetrisApp.pause(); // stop animation
         }
     }
 

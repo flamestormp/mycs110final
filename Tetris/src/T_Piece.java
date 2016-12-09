@@ -11,7 +11,8 @@ import javafx.scene.paint.Color;
 public class T_Piece extends TetrisPiece {
 
     /**
-     * @param board game board
+     * Basic Constructor for T_Piece
+     * @param board gameboard
      */
     public T_Piece(TetrisBoard board) {
         super(board,Color.PURPLE);

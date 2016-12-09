@@ -149,6 +149,10 @@ public class TetrisSquare {
         shape.setStroke(Color.BLACK);
     }
 
+    /**
+     * Getter method for square color.
+     * @return Color
+     */
     public Color getColor() {
     	return color;
     }
