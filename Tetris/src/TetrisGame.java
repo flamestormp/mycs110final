@@ -47,7 +47,7 @@ public class TetrisGame {
         default:
         }
         // Piece starts out in the middle of the screen near the top.
-        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 0);
+        current_piece.moveToTetrisLocation(TetrisBoard.X_DIM_SQUARES/2, 1);
         // End game if piece cannot move after created.
         if(current_piece.checkDown() == false) {
             gameOver = true;
